@@ -38,8 +38,10 @@
 
 #import <UIKit/UIKit.h>
 #import "GolgiWrapper.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface keyViewController : UIViewController <UITextFieldDelegate>
+@interface keyViewController : UIViewController <UITextFieldDelegate, ABPeoplePickerNavigationControllerDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextField *requesterTextField;
 @property (weak, nonatomic) IBOutlet UITextField *granterTextField;

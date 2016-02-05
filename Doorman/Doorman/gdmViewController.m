@@ -84,7 +84,6 @@ CLLocationManager *locationManager = nil;
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Images/background.jpg"]];
     golgiWrapper = [[GolgiWrapper alloc] init];
 
 }
@@ -254,16 +253,15 @@ CLLocationManager *locationManager = nil;
 
 - (void)resetButtonImage:(NSTimer *)timer
 {
-    UIImage *btnImage = [UIImage imageNamed:@"pto_button.png"];
-    [AccessButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+        [AccessButton setTitle:@"Open Door" forState:UIControlStateNormal];
 }
 
 - (void)UIForAccessResult:(AccessResponse *)result
 {
     if([[result getCode] isEqualToString:@"200"]){
         // button
-        UIImage *btnImage = [UIImage imageNamed:@"do_button.png"];
-        [AccessButton setBackgroundImage:btnImage forState:UIControlStateNormal];
+        
+        [AccessButton setTitle:@"Opened!" forState:UIControlStateNormal];
         [NSTimer scheduledTimerWithTimeInterval:2.0
                                          target:self
                                        selector:@selector(resetButtonImage:)

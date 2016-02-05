@@ -37,8 +37,11 @@
 //
 
 #import "keyViewController.h"
-
+#import <QuartzCore/QuartzCore.h>
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 @interface keyViewController ()
+@property (nonatomic, retain) ABPeoplePickerNavigationController *addressBookController;
 
 @end
 
@@ -61,6 +64,99 @@
     requesterTextField.delegate = self;
     granterTextField.delegate = self;
     // Do any additional setup after loading the view.
+    
+    UIToolbar* assignToolbar = [[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 50)];
+    assignToolbar.barStyle = UIBarStyleBlackTranslucent;
+    assignToolbar.items = [NSArray arrayWithObjects:
+                           [[UIBarButtonItem alloc]initWithTitle:@"Use Contact" style:UIBarButtonItemStyleDone target:self action:@selector(showAddressBook)],
+                           [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                           nil];
+    [assignToolbar sizeToFit];
+    
+
+    
+    for (UITextView *subview in self.view.subviews) {
+        
+        // Do what you want to do with the subview
+        NSLog(@"%@", subview);
+        
+        // List the subviews of subview
+        if([subview isKindOfClass:[UITextField class]]){
+            subview.inputAccessoryView = assignToolbar;
+        }
+    }
+
+    
+}
+-(void)showAddressBook{
+    _addressBookController = [[ABPeoplePickerNavigationController alloc] init];
+    [_addressBookController setPeoplePickerDelegate:self];
+    [self presentViewController:_addressBookController animated:YES completion:nil];
+}
+-(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
+    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
+}
+
+-(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    CFTypeRef generalCFObject;
+    generalCFObject = ABRecordCopyValue(person, kABPersonEmailProperty);
+    [defaults setObject:[(__bridge id _Nullable)(generalCFObject) stringValue] forKey:@"email"];
+    [defaults synchronize];
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Use Email?"
+                                          message:[NSString stringWithFormat:@"Would you like to assign email %@ to requester or keyholder field?", [(__bridge id _Nullable)(generalCFObject) stringValue]]
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Keyholder", @"Cancel action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       for (UITextView *subview in self.view.subviews) {
+                                           
+                                           // Do what you want to do with the subview
+                                           NSLog(@"%@", subview);
+                                           
+                                           // List the subviews of subview
+                                           if([subview isKindOfClass:[UITextField class]]){
+                                               if(subview.tag == 0){
+                                                   subview.text = [(__bridge id _Nullable)(generalCFObject) stringValue];
+                                               }
+                                           }
+                                       }
+                                       
+
+                                       
+                                   }];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Requester", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   for (UITextView *subview in self.view.subviews) {
+                                       
+                                       // Do what you want to do with the subview
+                                       NSLog(@"%@", subview);
+                                       
+                                       // List the subviews of subview
+                                       if([subview isKindOfClass:[UITextField class]]){
+                                           if(subview.tag == 1){
+                                               subview.text = [(__bridge id _Nullable)(generalCFObject) stringValue];
+                                           }
+                                       }
+                                   }
+                               }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    
+    
+    
+    return NO;
 }
 
 - (void)didReceiveMemoryWarning
@@ -133,7 +229,10 @@
             // List the subviews of subview
             if([subview isKindOfClass:[UITextField class]]){
                 if ([(UITextField*)subview.text  isEqual: @""]) {
-                    subview.backgroundColor = [UIColor redColor];
+                    subview.layer.cornerRadius=8.0f;
+                    subview.layer.masksToBounds=YES;
+                    subview.layer.borderColor=[[UIColor redColor]CGColor];
+                    subview.layer.borderWidth= 1.0f;
                 }
             }
         }
