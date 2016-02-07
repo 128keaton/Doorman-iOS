@@ -88,13 +88,103 @@
 
     
 }
+- (void)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker didSelectPerson:(ABRecordRef)person{
+
+    
+    CFTypeRef generalCFObject;
+    generalCFObject = ABRecordCopyValue(person, kABPersonEmailProperty);
+
+    NSString *email = (__bridge_transfer NSString *)ABRecordCopyValue(person, kABPersonEmailProperty);
+    
+    ABMultiValueRef emails = ABRecordCopyValue(person, kABPersonEmailProperty);
+    if(emails){
+        email = (__bridge NSString *) ABMultiValueCopyValueAtIndex(emails,0);
+    
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:@"Use Email?"
+                                          message:[NSString stringWithFormat:@"Would you like to assign email %@ to requester or keyholder field?", email]
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Keyholder", @"Cancel action")
+                                   style:UIAlertActionStyleDefault
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       for (UITextView *subview in self.view.subviews) {
+                                           
+                                           // Do what you want to do with the subview
+                                           NSLog(@"%@", subview);
+                                           
+                                           // List the subviews of subview
+                                           if([subview isKindOfClass:[UITextField class]]){
+                                               if(subview.tag == 0){
+                                                   subview.text = email;
+                                                   
+                                               }
+                                           }
+                                       }
+                                       
+                                       
+                                       
+                                   }];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Requester", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   for (UITextView *subview in self.view.subviews) {
+                                       
+                                       // Do what you want to do with the subview
+                                       NSLog(@"%@", subview);
+                                       
+                                       // List the subviews of subview
+                                       if([subview isKindOfClass:[UITextField class]]){
+                                           if(subview.tag == 1){
+                                               subview.text = email;
+                                               
+                                           }
+                                       }
+                                   }
+                               }];
+    
+    [alertController addAction:cancelAction];
+    [alertController addAction:okAction];
+    [_addressBookController dismissViewControllerAnimated:YES completion:nil];
+    [self presentViewController:alertController animated:YES completion:nil];
+
+        
+    }else{
+        UIAlertController *oopsController = [UIAlertController alertControllerWithTitle:@"Oops!" message:@"The selected contact doesn't have an email." preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action){
+            [self presentViewController:_addressBookController animated:YES completion:nil];
+        }];
+        [oopsController addAction:okAction];
+        [_addressBookController dismissViewControllerAnimated:YES completion:nil];
+        [self presentViewController:oopsController animated:YES completion:nil];
+    }
+   
+
+    
+    
+}
 -(void)showAddressBook{
-    _addressBookController = [[ABPeoplePickerNavigationController alloc] init];
+    _addressBookController = [ABPeoplePickerNavigationController new];
+    
     [_addressBookController setPeoplePickerDelegate:self];
     [self presentViewController:_addressBookController animated:YES completion:nil];
 }
 -(void)peoplePickerNavigationControllerDidCancel:(ABPeoplePickerNavigationController *)peoplePicker{
     [_addressBookController dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)peoplePickerNavigationController:
+(ABPeoplePickerNavigationController *)peoplePicker
+      shouldContinueAfterSelectingPerson:(ABRecordRef)person
+                                property:(ABPropertyID)property
+                              identifier:(ABMultiValueIdentifier)identifier
+{
+    return NO;
 }
 
 -(BOOL)peoplePickerNavigationController:(ABPeoplePickerNavigationController *)peoplePicker shouldContinueAfterSelectingPerson:(ABRecordRef)person{

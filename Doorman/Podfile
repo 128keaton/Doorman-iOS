@@ -1,0 +1,2 @@
+xcodeproj 'Doorman.xcodeproj'
+pod 'MBProgressHUD', '~> 0.9.2'

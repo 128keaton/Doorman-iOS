@@ -37,7 +37,7 @@
 //
 
 #import "gdmViewController.h"
-
+#import "MBProgressHUD.h"
 @interface gdmViewController ()
 @end
 
@@ -49,6 +49,9 @@ AVAudioPlayer *player;
 GolgiWrapper *golgiWrapper;
 id<DoormanSendKeyRequestResultSender> rs;
 KeyRequest *kr;
+UIColor *buttonColor;
+MBProgressHUD *hud;
+
 
 // class variables
 CLLocationManager *locationManager = nil;
@@ -248,20 +251,40 @@ CLLocationManager *locationManager = nil;
 }
 
 - (IBAction)sendAccessRequest:(id)sender {
-    [self startStandardUpdates];
+ 
+    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+            [self startStandardUpdates];
+    
 }
 
 - (void)resetButtonImage:(NSTimer *)timer
 {
         [AccessButton setTitle:@"Open Door" forState:UIControlStateNormal];
+        [UIView animateWithDuration:.25
+                     animations:^{
+                         [AccessButton setBackgroundColor:buttonColor];
+                     }
+                     completion:nil];
+
+
 }
 
 - (void)UIForAccessResult:(AccessResponse *)result
 {
     if([[result getCode] isEqualToString:@"200"]){
         // button
-        
+        [hud hide:YES];
+        hud = nil;
         [AccessButton setTitle:@"Opened!" forState:UIControlStateNormal];
+        buttonColor = AccessButton.backgroundColor;
+       
+        [UIView animateWithDuration:.25
+                         animations:^{
+                              [AccessButton setBackgroundColor:[UIColor greenColor]];
+                         }
+                         completion:^(BOOL finished){
+                             NSLog(@"completion block");
+                         }];
         [NSTimer scheduledTimerWithTimeInterval:2.0
                                          target:self
                                        selector:@selector(resetButtonImage:)
