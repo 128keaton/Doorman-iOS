@@ -53,6 +53,7 @@ UIColor *buttonColor;
 MBProgressHUD *hud;
 
 
+
 // class variables
 CLLocationManager *locationManager = nil;
 
@@ -89,6 +90,7 @@ CLLocationManager *locationManager = nil;
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     golgiWrapper = [[GolgiWrapper alloc] init];
+     [UIApplication sharedApplication].statusBarStyle = UIStatusBarStyleLightContent;
 
 }
 
@@ -158,9 +160,9 @@ CLLocationManager *locationManager = nil;
         }
         else{
             UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Access Denied"
-                                                              message:@"Your Location cannot be verified"
+                                                              message:@"You aren't close enough"
                                                              delegate:nil
-                                                    cancelButtonTitle:@"OK"
+                                                    cancelButtonTitle:@"Ok"
                                                     otherButtonTitles:nil];
             [hud hide:YES];
             hud = nil;
