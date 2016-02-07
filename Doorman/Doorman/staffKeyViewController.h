@@ -41,7 +41,9 @@
 #import "DoormanSvcGen.h"
 #import "KeyResultHandlerImpl.h"
 
-@interface staffKeyViewController : UIViewController <UITextFieldDelegate>
+@interface staffKeyViewController : UIViewController <UITextFieldDelegate>{
+    IBOutlet UIButton *settingsButton;
+}
 
 @property (weak, nonatomic) IBOutlet UITextField *pinTextField;
 @property (weak, nonatomic) IBOutlet UIButton *keyRequestButton;

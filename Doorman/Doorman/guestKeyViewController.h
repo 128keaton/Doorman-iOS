@@ -39,8 +39,8 @@
 #import <UIKit/UIKit.h>
 #import "DoormanSvcGen.h"
 #import "KeyResultHandlerImpl.h"
-
+#import "BitDatePicker.h"
 @interface guestKeyViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (weak, nonatomic) IBOutlet BitDatePicker *datePicker;
 
 @end

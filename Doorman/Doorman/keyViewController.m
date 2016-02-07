@@ -70,6 +70,7 @@
     assignToolbar.items = [NSArray arrayWithObjects:
                            [[UIBarButtonItem alloc]initWithTitle:@"Use Contact" style:UIBarButtonItemStyleDone target:self action:@selector(showAddressBook)],
                            [[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil],
+                         
                            nil];
     [assignToolbar sizeToFit];
     

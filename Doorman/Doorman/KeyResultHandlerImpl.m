@@ -60,10 +60,10 @@ gdmViewController *viewId;
     preferences = [NSUserDefaults standardUserDefaults];
     
     [preferences setObject:[result getKey] forKey:keyKey];
-    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Key Request Response"
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Success!"
                                                       message:@"Key Issued"
                                                      delegate:nil
-                                            cancelButtonTitle:@"OK"
+                                            cancelButtonTitle:@"Ok"
                                             otherButtonTitles:nil];
     [message show];
 }

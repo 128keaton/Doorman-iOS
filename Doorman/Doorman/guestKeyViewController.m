@@ -58,8 +58,13 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    datePicker.backgroundColor = [UIColor whiteColor];
+    [datePicker setValue:[UIColor whiteColor] forKey:@"textColor"];
+    SEL selector = NSSelectorFromString(@"setHighlightsToday:");
+    NSInvocation *invocation = [NSInvocation invocationWithMethodSignature:[UIDatePicker instanceMethodSignatureForSelector:selector]];
+    BOOL no = NO;
+    [invocation setSelector:selector];
+    [invocation setArgument:&no atIndex:2];
+    [invocation invokeWithTarget:self.datePicker];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +98,7 @@
     [keyRequest setDay:[comps day]];
     [keyRequest setMonth:[comps month]];
     [keyRequest setYear:[comps year]];
+    
     NSLog(@"Day: %ld Month: %ld Year: %ld",(long)[keyRequest getDay],(long)[keyRequest getMonth],(long)[keyRequest getYear]);
     [DoormanSvc sendSendKeyRequestUsingResultReceiver:[[KeyResultHandlerImpl alloc]initWithViewId:segue.destinationViewController] andDestination:@"doormanserver-uname" withReq:keyRequest];
 }

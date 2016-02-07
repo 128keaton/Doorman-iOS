@@ -86,6 +86,7 @@
     } else {
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
+     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
     return YES;
 }

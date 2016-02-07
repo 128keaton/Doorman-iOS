@@ -62,6 +62,7 @@ CLLocationManager *locationManager = nil;
     rs = resultSender;
     kr = req;
     [self performSegueWithIdentifier:@"VisitorKeySegue" sender:self];
+    NSLog(@"pushing to visitor key segue");
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -139,7 +140,7 @@ CLLocationManager *locationManager = nil;
     CLLocation* location = [locations lastObject];
     NSDate* eventDate = location.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (abs(howRecent) < 15.0) {
+    if (fabs(howRecent) < 15.0) {
 
         // stop updating the location - this is recent enough
         [manager stopUpdatingLocation];
@@ -161,9 +162,11 @@ CLLocationManager *locationManager = nil;
                                                              delegate:nil
                                                     cancelButtonTitle:@"OK"
                                                     otherButtonTitles:nil];
-          //  [message show];
+            [hud hide:YES];
+            hud = nil;
+            [message show];
         }
-          [self sendAccessRequestWkr:office];
+    
     }
 }
 

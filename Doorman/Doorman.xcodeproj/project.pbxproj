@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A0DC4FF1C66E80E00D07B70 /* BitDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A0DC4FE1C66E80D00D07B70 /* BitDatePicker.m */; };
+		8A0DC5041C66F3FD00D07B70 /* Engineering Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0DC5031C66F3FD00D07B70 /* Engineering Filled-50.png */; };
 		8A2EFCBB1C64FCAD00F9D6F6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8A2EFCBA1C64FCAD00F9D6F6 /* Images.xcassets */; };
 		8A2EFCBD1C64FF1000F9D6F6 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8A2EFCBC1C64FF1000F9D6F6 /* Launch Screen.storyboard */; };
 		BF1B3F021A65AD68006DCBEC /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = BFB520D91A657514007AAEAD /* libsqlite3.0.dylib */; };
@@ -59,6 +61,9 @@
 /* Begin PBXFileReference section */
 		647FD741AA4F8357257DE801 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6683F15329F1F6E166283257 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		8A0DC4FD1C66E80D00D07B70 /* BitDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BitDatePicker.h; sourceTree = "<group>"; };
+		8A0DC4FE1C66E80D00D07B70 /* BitDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BitDatePicker.m; sourceTree = "<group>"; };
+		8A0DC5031C66F3FD00D07B70 /* Engineering Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Engineering Filled-50.png"; sourceTree = "<group>"; };
 		8A2EFCBA1C64FCAD00F9D6F6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		8A2EFCBC1C64FF1000F9D6F6 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		A757CA272D3B3E782540EE4F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +147,49 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8A0DC5001C66F36300D07B70 /* User Interface Files */ = {
+			isa = PBXGroup;
+			children = (
+				8A0DC4FD1C66E80D00D07B70 /* BitDatePicker.h */,
+				8A0DC4FE1C66E80D00D07B70 /* BitDatePicker.m */,
+				BF70437E198163CC00852B5C /* Main.storyboard */,
+				8A2EFCBC1C64FF1000F9D6F6 /* Launch Screen.storyboard */,
+			);
+			name = "User Interface Files";
+			sourceTree = "<group>";
+		};
+		8A0DC5011C66F37300D07B70 /* Golgi Library Files */ = {
+			isa = PBXGroup;
+			children = (
+				BF8C93811982A48200E3CFB1 /* AccessResultHandlerImpl.h */,
+				BF8C93821982A48200E3CFB1 /* AccessResultHandlerImpl.m */,
+				BFE25F3219894D1B007FCFA1 /* KeyResultHandlerImpl.h */,
+				BFE25F35198AB8BE007FCFA1 /* GolgiWrapper.h */,
+				BFE25F36198AB8BE007FCFA1 /* GolgiWrapper.m */,
+				BFE25F3319894D1B007FCFA1 /* KeyResultHandlerImpl.m */,
+				BF44E76A1986516E00C67F56 /* SvcWrapper.h */,
+				BF44E76B1986516E00C67F56 /* SvcWrapper.m */,
+			);
+			name = "Golgi Library Files";
+			sourceTree = "<group>";
+		};
+		8A0DC5021C66F38800D07B70 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BFE25F2F19892DB0007FCFA1 /* staffKeyViewController.h */,
+				BFE25F3019892DB0007FCFA1 /* staffKeyViewController.m */,
+				BFE25F2C198922A2007FCFA1 /* keyViewController.h */,
+				BFE25F2D198922A2007FCFA1 /* keyViewController.m */,
+				BF70437B1981605000852B5C /* gdmViewController.h */,
+				BF70437C1981605000852B5C /* gdmViewController.m */,
+				BF9DABD01992411800DED3F2 /* guestKeyViewController.h */,
+				BF9DABD11992411800DED3F2 /* guestKeyViewController.m */,
+				BF9DABD319925FBC00DED3F2 /* KeyRequestViewController.h */,
+				BF9DABD419925FBC00DED3F2 /* KeyRequestViewController.m */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
 		9542DBA35963D99FD2117AB8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,32 +249,13 @@
 			isa = PBXGroup;
 			children = (
 				BF60A70219913F5E0076DD3F /* Sounds */,
-				BF8C93811982A48200E3CFB1 /* AccessResultHandlerImpl.h */,
-				BF8C93821982A48200E3CFB1 /* AccessResultHandlerImpl.m */,
-				BF70437E198163CC00852B5C /* Main.storyboard */,
-				8A2EFCBC1C64FF1000F9D6F6 /* Launch Screen.storyboard */,
-				BFE25F3219894D1B007FCFA1 /* KeyResultHandlerImpl.h */,
-				BF8DBD6B19F952440021C54D /* doorman-build-script.sh */,
-				BFE25F35198AB8BE007FCFA1 /* GolgiWrapper.h */,
-				BFE25F36198AB8BE007FCFA1 /* GolgiWrapper.m */,
-				BFE25F3319894D1B007FCFA1 /* KeyResultHandlerImpl.m */,
-				BFE25F2F19892DB0007FCFA1 /* staffKeyViewController.h */,
-				BFE25F3019892DB0007FCFA1 /* staffKeyViewController.m */,
-				BFE25F2C198922A2007FCFA1 /* keyViewController.h */,
-				BFBA23121A5D3B8700490829 /* keyViewController.m.default */,
-				BFE25F2D198922A2007FCFA1 /* keyViewController.m */,
-				BF700C0D19814A0C00852B5C /* Images */,
+				8A0DC5011C66F37300D07B70 /* Golgi Library Files */,
+				8A0DC5001C66F36300D07B70 /* User Interface Files */,
+				8A0DC5021C66F38800D07B70 /* View Controllers */,
 				BF700BE1198132C000852B5C /* gdmAppDelegate.h */,
 				BF700BE2198132C000852B5C /* gdmAppDelegate.m */,
 				BF700BD9198132C000852B5C /* Supporting Files */,
-				BF70437B1981605000852B5C /* gdmViewController.h */,
-				BF70437C1981605000852B5C /* gdmViewController.m */,
-				BF44E76A1986516E00C67F56 /* SvcWrapper.h */,
-				BF44E76B1986516E00C67F56 /* SvcWrapper.m */,
-				BF9DABD01992411800DED3F2 /* guestKeyViewController.h */,
-				BF9DABD11992411800DED3F2 /* guestKeyViewController.m */,
-				BF9DABD319925FBC00DED3F2 /* KeyRequestViewController.h */,
-				BF9DABD419925FBC00DED3F2 /* KeyRequestViewController.m */,
+				BF700C0D19814A0C00852B5C /* Images */,
 				8A2EFCBA1C64FCAD00F9D6F6 /* Images.xcassets */,
 			);
 			path = Doorman;
@@ -235,6 +264,8 @@
 		BF700BD9198132C000852B5C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				BFBA23121A5D3B8700490829 /* keyViewController.m.default */,
+				BF8DBD6B19F952440021C54D /* doorman-build-script.sh */,
 				BF700BDA198132C000852B5C /* Doorman-Info.plist */,
 				BF700BDB198132C000852B5C /* InfoPlist.strings */,
 				BF700BDE198132C000852B5C /* main.m */,
@@ -264,6 +295,7 @@
 		BF700C0D19814A0C00852B5C /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				8A0DC5031C66F3FD00D07B70 /* Engineering Filled-50.png */,
 				BF700C031981377E00852B5C /* background.jpg */,
 				BF700C041981377E00852B5C /* do_button.png */,
 				BF700C051981377E00852B5C /* doorman_icon.png */,
@@ -359,6 +391,7 @@
 			files = (
 				BF700C081981377E00852B5C /* background.jpg in Resources */,
 				BF700C0B1981377E00852B5C /* pto_button.png in Resources */,
+				8A0DC5041C66F3FD00D07B70 /* Engineering Filled-50.png in Resources */,
 				BF700C091981377E00852B5C /* do_button.png in Resources */,
 				BFBA23131A5D3B8700490829 /* keyViewController.m.default in Resources */,
 				8A2EFCBB1C64FCAD00F9D6F6 /* Images.xcassets in Resources */,
@@ -457,6 +490,7 @@
 				BFE25F2E198922A2007FCFA1 /* keyViewController.m in Sources */,
 				BF44E76C1986516E00C67F56 /* SvcWrapper.m in Sources */,
 				BFE25F37198AB8BE007FCFA1 /* GolgiWrapper.m in Sources */,
+				8A0DC4FF1C66E80E00D07B70 /* BitDatePicker.m in Sources */,
 				BF9DABD519925FBC00DED3F2 /* KeyRequestViewController.m in Sources */,
 				BF9DABD21992411800DED3F2 /* guestKeyViewController.m in Sources */,
 			);

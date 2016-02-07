@@ -59,6 +59,7 @@
 {
     [super viewDidLoad];
     pinTextField.delegate = self;
+    settingsButton.enabled = NO;
     // Do any additional setup after loading the view.
 }
 
@@ -73,6 +74,7 @@
     NSString *pin = textView.text;
     if(pin != nil && [pin length] > 0){
         [keyRequestButton setEnabled:YES];
+        [settingsButton setEnabled:YES];
     }
 }
 
@@ -126,6 +128,7 @@
     [keyRequest setRequestId:granter_name];
     [keyRequest setSenderId:username];
     [DoormanSvc sendSendKeyRequestUsingResultReceiver:[[KeyResultHandlerImpl alloc]initWithViewId:segue.destinationViewController] andDestination:@"doormanserver-uname" withReq:keyRequest];
+    
 }
 
 /*
