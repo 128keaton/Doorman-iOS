@@ -17,15 +17,15 @@ GOLGI_LIB_DIR="$PROJECT_DIR/$PROJECT_NAME"
 # Copy Thrift file(s) into place (if necessary)
 #
 
-cp -f "$PROJECT_DIR/../../Doorman.thrift" "$WKDIR"
+cp -f "$PROJECT_DIR/Doorman.thrift" "$WKDIR"
 
 #
 # Create the DOORMAN_KEYS.h file containing
 # the Developer key and the application key
 #
 
-DEVKEY=`cat "$PROJECT_DIR/../../Golgi.DevKey"`
-APPKEY=`cat "$PROJECT_DIR/../../Golgi.AppKey"`
+DEVKEY=`cat "$PROJECT_DIR/Golgi.DevKey"`
+APPKEY=`cat "$PROJECT_DIR/Golgi.AppKey"`
 echo "#define DOORMAN_DEV_KEY @\"$DEVKEY\"" >"$GOLGI_HDR_DIR/DOORMAN_KEYS.h"
 echo "#define DOORMAN_APP_KEY @\"$APPKEY\"" >>"$GOLGI_HDR_DIR/DOORMAN_KEYS.h"
 
@@ -36,12 +36,12 @@ echo "#define DOORMAN_APP_KEY @\"$APPKEY\"" >>"$GOLGI_HDR_DIR/DOORMAN_KEYS.h"
 # Remove the thrift file because the canonical source is elsewhere
 #
 
-rm -f "$GOLGI_WORK_DIR/Doorman.thrift"
+
 
 #
 # Check and parse config
 #
-if [ ! -f $PROJECT_DIR/../../Doorman.conf ]; then
+if [ ! -f $PROJECT_DIR/Doorman.conf ]; then
     echo "Cannot find Doorman.conf file .. exiting build"
     exit 2
 fi
@@ -56,7 +56,7 @@ while read -r line; do
     if [[ $line == *'LON'* ]]; then
         LON=`echo $line | cut -d '=' -f 2 | tr -d ' \r\n'`
     fi
-done < $PROJECT_DIR/../../Doorman.conf
+done < $PROJECT_DIR/Doorman.conf
 
 #
 # Replace Doorman Address value
