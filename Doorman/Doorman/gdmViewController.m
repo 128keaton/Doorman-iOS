@@ -116,11 +116,20 @@ CLLocationManager *locationManager = nil;
 
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyKilometer;
-
+    if ([locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+        [locationManager requestWhenInUseAuthorization];
+    }
     // Set a movement threshold for new events.
     locationManager.distanceFilter = 500; // meters
+    CLLocation *office;
+    CLLocationDegrees latitude = +35.149928;
+    CLLocationDegrees longitude = -89.944442;
+    office = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
 
+
+    
     [locationManager startUpdatingLocation];
+      
 }
 
 // Delegate method from the CLLocationManagerDelegate protocol.
@@ -137,12 +146,12 @@ CLLocationManager *locationManager = nil;
     CLLocationDegrees latitude = +35.149928;
     CLLocationDegrees longitude = -89.944442;
     office = [[CLLocation alloc]initWithLatitude:latitude longitude:longitude];
-
+    
     // If it's a relatively recent event, turn off updates to save power.
     CLLocation* location = [locations lastObject];
     NSDate* eventDate = location.timestamp;
     NSTimeInterval howRecent = [eventDate timeIntervalSinceNow];
-    if (fabs(howRecent) < 15.0) {
+    if (abs(howRecent) < 15.0) {
 
         // stop updating the location - this is recent enough
         [manager stopUpdatingLocation];
@@ -164,9 +173,9 @@ CLLocationManager *locationManager = nil;
                                                              delegate:nil
                                                     cancelButtonTitle:@"Ok"
                                                     otherButtonTitles:nil];
-            [hud hide:YES];
-            hud = nil;
-            [message show];
+           
+           // [message show];
+            [self sendAccessRequestWkr:location];
         }
     
     }
@@ -214,7 +223,13 @@ CLLocationManager *locationManager = nil;
     }
 
     NSLog(@"Access Request:username: [%@]:key: [%@]",userName,key);
-
+    // Doesn't exist
+    UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Sending Key"
+                                                      message:@":D"
+                                                     delegate:nil
+                                            cancelButtonTitle:@"OK"
+                                            otherButtonTitles:nil];
+    [message show];
     // call a send
     //NSString *destination = @"doormanserver-uname";
     AccessRequest *accessRequest;
@@ -257,7 +272,6 @@ CLLocationManager *locationManager = nil;
 
 - (IBAction)sendAccessRequest:(id)sender {
  
-    hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
             [self startStandardUpdates];
     
 }
@@ -278,8 +292,7 @@ CLLocationManager *locationManager = nil;
 {
     if([[result getCode] isEqualToString:@"200"]){
         // button
-        [hud hide:YES];
-        hud = nil;
+        
         [AccessButton setTitle:@"Opened!" forState:UIControlStateNormal];
         buttonColor = AccessButton.backgroundColor;
        

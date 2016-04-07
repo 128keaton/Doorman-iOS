@@ -84,7 +84,7 @@
         [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     } else {
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
+       // [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
      [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDefault];
     
